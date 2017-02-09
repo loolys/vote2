@@ -6,6 +6,7 @@ import IndexPage from './components/IndexPage/IndexPage.js';
 import About from './components/About/About.js';
 import SignUp from './components/SignUp/SignUp.js';
 import Login from './components/Login/Login.js';
+import NewPoll from './components/NewPoll/NewPoll.js';
 
 const Routes = (props) => (
   <Router {...props}>
@@ -14,6 +15,7 @@ const Routes = (props) => (
       <Route path="/about" component={About} />
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={Login} />
+      <Route path="/new-poll" component={NewPoll} />
     </Route>
   </Router>
 );
