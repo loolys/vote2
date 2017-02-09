@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
+mongoose.Promise = global.Promise;
 
 const UserSchema = new Schema({
   username: {

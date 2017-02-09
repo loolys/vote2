@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const users = require('./routes/users');
 const UserModel = require('./models/user-model');
 
+mongoose.Promise = global.Promise;
 const connStr = 'mongodb://localhost:27017/mongoose-bcrypt-test';
 mongoose.connect(connStr);
 const db = mongoose.connection;
