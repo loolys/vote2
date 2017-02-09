@@ -28,4 +28,16 @@ router.post('/', (req, res) => {
 
 });
 
+router.get('/:identifier', (req, res) => {
+  let query = UserModel.where({ username: req.params.identifier })
+  query.findOne(function (err, found) {
+    if (err) throw err;
+    if (found) {
+      res.json( {found} );
+    } else {
+      res.json({found: 'nothing'})
+    }
+  });
+})
+
 module.exports = router;
