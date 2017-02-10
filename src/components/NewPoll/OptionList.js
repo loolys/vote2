@@ -1,10 +1,12 @@
 import React from 'react';
 
 function OptionList(props) {
-  const items = props.items;
+  console.log(props);
+  const { items, deleteOption } = props;
   const listItem = items.map((item) => 
-    <li key={item}>
-      {item}
+    <li key={item.id}>
+      <span>{item.text}</span> <button 
+        onClick={deleteOption.bind(this, item)}> Delete </button> 
     </li>
   );
   return (

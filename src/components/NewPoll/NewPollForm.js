@@ -10,13 +10,14 @@ class NewPollForm extends React.Component {
       errors: {},
       isLoading: false,
       option: '',
-      options: []
+      options: [],
+      id: 0
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.optionChange = this.optionChange.bind(this);
     this.addOption = this.addOption.bind(this);
+    this.deleteOption = this.deleteOption.bind(this);
   }
 
   onChange(e) {
@@ -28,18 +29,34 @@ class NewPollForm extends React.Component {
   }
 
   addOption(event) {
+    let obj = {
+      id: this.state.id,
+      text: this.state.option
+    };
+
     this.setState(
       { 
-        options: this.state.options.concat([this.state.option]),
-        option: ''
+        options: this.state.options.concat([obj]),
+        option: '',
+        id: this.state.id + 1
       });
+  }
+
+  deleteOption(item) {
+    console.log(item);
+    const newState = this.state.options;
+    if (newState.indexOf(item) > -1) {
+      newState.splice(newState.indexOf(item), 1);
+      this.setState({ options: newState });
+    }
   }
 
   render() {
     const { title, errors, isLoading, option, options } = this.state;
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <div>
+      <form onSubmit={this.addOption}>
         <h1>Create New Poll</h1>
 
         <TextFieldGroup
@@ -50,7 +67,7 @@ class NewPollForm extends React.Component {
           onChange={this.onChange}
           error={errors.title}
         />
-        <OptionList items={options} />
+        <OptionList items={options} deleteOption={this.deleteOption} />
 
         <TextFieldGroup
           field="option"
@@ -68,8 +85,10 @@ class NewPollForm extends React.Component {
         >
           Add item
         </button>
-        <button type="submit" className="btn btn-primary">Create</button>
+        
       </form>
+      <button type="submit" className="btn btn-primary">Create</button>
+      </div>
     );
   }
 }
