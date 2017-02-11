@@ -5,8 +5,11 @@ function OptionList(props) {
   const { items, deleteOption } = props;
   const listItem = items.map((item) => 
     <li key={item.id}>
-      <span>{item.text}</span> <button 
-        onClick={deleteOption.bind(this, item)}> Delete </button> 
+      {item.text} <span><button 
+        onClick={deleteOption.bind(this, item)} 
+        className="btn btn-sm btn-danger pull-right">
+         Delete 
+         </button></span>
     </li>
   );
   return (

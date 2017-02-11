@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const polls = require('./routes/polls');
 const UserModel = require('./models/user-model');
 
 mongoose.Promise = global.Promise;
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/polls', polls);
 
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));

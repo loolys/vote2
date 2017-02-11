@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import OptionList from './OptionList'
+import { connect } from 'react-redux';
+import { createPoll } from '../../actions/pollActions';
+
+import './NewPoll.css';
 
 class NewPollForm extends React.Component {
   constructor(props) {
@@ -26,9 +30,11 @@ class NewPollForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.props.createPoll(this.state);
   }
 
   addOption(event) {
+    event.preventDefault();
     let obj = {
       id: this.state.id,
       text: this.state.option
@@ -55,7 +61,7 @@ class NewPollForm extends React.Component {
     const { title, errors, isLoading, option, options } = this.state;
 
     return (
-      <div>
+      <div className="container">
       <form onSubmit={this.addOption}>
         <h1>Create New Poll</h1>
 
@@ -67,7 +73,7 @@ class NewPollForm extends React.Component {
           onChange={this.onChange}
           error={errors.title}
         />
-        <OptionList items={options} deleteOption={this.deleteOption} />
+        
 
         <TextFieldGroup
           field="option"
@@ -76,21 +82,36 @@ class NewPollForm extends React.Component {
           value={option}
           onChange={this.onChange}
           error={errors.option}
+          type="text"
         />
 
-        <button 
+        <input type="submit" className="hide" />
+        
+      </form>
+
+      <OptionList items={options} deleteOption={this.deleteOption} />
+
+      <button 
           type="button"
           className="btn btn-success"
           onClick={this.addOption}
         >
           Add item
         </button>
-        
-      </form>
-      <button type="submit" className="btn btn-primary">Create</button>
+
+      <button type="button"
+       className="btn btn-primary"
+       onClick={this.onSubmit}
+      >
+        Create
+      </button>
       </div>
     );
   }
 }
 
-export default NewPollForm
+NewPollForm.propTypes = {
+  createPoll: React.PropTypes.func.isRequired
+}
+
+export default connect(null, { createPoll })(NewPollForm);
