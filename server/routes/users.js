@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
 
     user.save(function (err) {
       if (err) {
-        return res.status(500).json({ username: 'username exists' });
+        return res.status(500).json({ success: false, status: '500', errors: 'Username exists' });
       }
       res.json({ success: true });
     });
