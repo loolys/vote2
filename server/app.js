@@ -11,7 +11,7 @@ const polls = require('./routes/polls');
 const UserModel = require('./models/user-model');
 
 mongoose.Promise = global.Promise;
-const connStr = 'mongodb://localhost:27017/mongoose-bcrypt-test';
+const connStr = process.env.MONGODB || 'mongodb://localhost:27017/mongoose-bcrypt-test';
 mongoose.connect(connStr);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
