@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const users = require('./routes/users');
 const auth = require('./routes/auth');
@@ -30,6 +31,7 @@ app.use('/api/polls', polls);
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
+app.use(cors());
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
