@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classnames from 'classnames';
 import validateInput from '../../validations/signup.js'
 import TextFieldGroup from '../common/TextFieldGroup.js';
 
@@ -36,24 +35,24 @@ export default class SignUpForm extends Component {
   }
 
   checkUserExists(event) {
-    // event.preventDefault();
-    // const field = event.target.name;
-    // const val = event.target.value;
-    // if ( val !== '') {
-    //   this.props.isUserExists(val).then(res => {
-    //     let errors = this.state.errors;
-    //     let invalid;
-    //     console.log(res);
-    //     if (res.data.found.username) {
-    //       errors[field] = 'Username already exists';
-    //       invalid = true;
-    //     } else {
-    //       errors[field] = '';
-    //       invalid = false;
-    //     }
-    //     this.setState({ errors, invalid });
-    //   });
-    // }
+    event.preventDefault();
+    const field = event.target.name;
+    const val = event.target.value;
+    if ( val !== '') {
+      this.props.isUserExists(val).then(res => {
+        let errors = this.state.errors;
+        let invalid;
+        console.log(res);
+        if (res.data.found.username) {
+          errors[field] = 'Username already exists';
+          invalid = true;
+        } else {
+          errors[field] = '';
+          invalid = false;
+        }
+        this.setState({ errors, invalid });
+      });
+    }
 
   }
 

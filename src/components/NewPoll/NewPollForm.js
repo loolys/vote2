@@ -3,10 +3,11 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import OptionList from './OptionList'
 import { connect } from 'react-redux';
 import { createPoll } from '../../actions/pollActions';
+import validateInput from '../../validations/poll';
 
 import './NewPoll.css';
 
-class NewPollForm extends React.Component {
+class NewPollForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +25,25 @@ class NewPollForm extends React.Component {
     this.deleteOption = this.deleteOption.bind(this);
   }
 
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+
+    if (!isValid) {
+      this.setState({ errors: errors });
+    }
+
+    return isValid;
+  }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
+    if (this.isValid()) {
+      console.log('Valid poll');
+    }
     this.props.createPoll(this.state);
   }
 
@@ -100,8 +114,9 @@ class NewPollForm extends React.Component {
         </button>
 
       <button type="button"
-       className="btn btn-primary"
-       onClick={this.onSubmit}
+        disabled={isLoading}
+        className="btn btn-primary"
+        onClick={this.onSubmit}
       >
         Create
       </button>

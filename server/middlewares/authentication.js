@@ -16,7 +16,6 @@ module.exports = (req, res, next) => {
         res.status(401).json({ error: 'Failed to authenticate' });
       } else {
         let query = UserModel.where({ _id: decoded.id });
-        console.log(decoded);
         query.findOne({}, '_id username', function (err, found) {
           if (!found) {
             res.status(404).json({ error: 'No such user'});

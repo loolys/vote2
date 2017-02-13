@@ -1,7 +1,6 @@
 import React from 'react';
 
 function OptionList(props) {
-  console.log(props);
   const { items, deleteOption } = props;
   const listItem = items.map((item) => 
     <li key={item.id}>
