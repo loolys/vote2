@@ -89,7 +89,7 @@ class NewPollForm extends Component {
     const { title, errors, isLoading, option, options } = this.state;
 
     return (
-      <div className="container">
+      <div>
       <form onSubmit={this.addOption}>
         <h1>Create New Poll</h1>
 

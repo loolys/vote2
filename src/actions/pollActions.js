@@ -5,3 +5,9 @@ export function createPoll(poll) {
     return axios.post('api/polls', poll);
   }
 }
+
+export function getPolls() {
+  return dispatch => {
+    return axios.get('api/polls');
+  }
+}

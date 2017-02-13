@@ -7,8 +7,10 @@ class NewPoll extends Component {
   render() {
     const { addFlashMessage } = this.props;
     return (
-      <div>
-        <NewPollForm addFlashMessage={addFlashMessage} />
+      <div className="row">
+        <div className="col-md-4 col-md-offset-4">
+          <NewPollForm addFlashMessage={addFlashMessage} />
+        </div>
       </div>
     );
   }

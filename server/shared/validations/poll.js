@@ -12,6 +12,10 @@ module.exports = function validateInput(data) {
     errors.option = 'Minimum 2 options required.';
   }
 
+  if (data.options.length > 8) {
+    errors.option = 'No more than 8 options allowed, please delete some';
+  }
+  
   return {
     errors,
     isValid: isEmpty(errors)

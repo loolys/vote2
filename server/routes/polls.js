@@ -31,4 +31,11 @@ router.post('/', authentication, (req, res) => {
 
 });
 
+router.get('/', (req, res) => {
+  PollModel.find({}).sort('-date').limit(10).exec(function(err, docs) {
+    if (err) throw err;
+    console.log(docs);
+  });
+})
+
 module.exports = router;

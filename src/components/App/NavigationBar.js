@@ -13,9 +13,14 @@ class NavigationBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
 
     const userLinks = (
+      <div>
+      <ul className="nav navbar-nav">
+        <li><Link to="/new-poll">Create Poll </Link></li>
+      </ul>
       <ul className="nav navbar-nav navbar-right">
         <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
       </ul>
+      </div>
     );
 
     const guestLinks = (
