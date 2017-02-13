@@ -43,8 +43,22 @@ class NewPollForm extends Component {
     e.preventDefault();
     if (this.isValid()) {
       console.log('Valid poll');
+      this.props.createPoll(this.state).then(
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'Poll Created!'
+          });
+          this.context.router.push('/');
+        },
+        (err) => {
+          this.setState({
+            errors: err.response.data.errors,          
+          });
+        }
+      );
     }
-    this.props.createPoll(this.state);
+
   }
 
   addOption(event) {
@@ -126,7 +140,12 @@ class NewPollForm extends Component {
 }
 
 NewPollForm.propTypes = {
-  createPoll: React.PropTypes.func.isRequired
+  createPoll: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
+}
+
+NewPollForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect(null, { createPoll })(NewPollForm);
