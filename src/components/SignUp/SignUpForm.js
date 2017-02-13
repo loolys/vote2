@@ -36,24 +36,24 @@ export default class SignUpForm extends Component {
   }
 
   checkUserExists(event) {
-    event.preventDefault();
-    const field = event.target.name;
-    const val = event.target.value;
-    if ( val !== '') {
-      this.props.isUserExists(val).then(res => {
-        let errors = this.state.errors;
-        let invalid;
-        console.log(res);
-        if (res.data.found.username) {
-          errors[field] = 'Username already exists';
-          invalid = true;
-        } else {
-          errors[field] = '';
-          invalid = false;
-        }
-        this.setState({ errors, invalid });
-      });
-    }
+    // event.preventDefault();
+    // const field = event.target.name;
+    // const val = event.target.value;
+    // if ( val !== '') {
+    //   this.props.isUserExists(val).then(res => {
+    //     let errors = this.state.errors;
+    //     let invalid;
+    //     console.log(res);
+    //     if (res.data.found.username) {
+    //       errors[field] = 'Username already exists';
+    //       invalid = true;
+    //     } else {
+    //       errors[field] = '';
+    //       invalid = false;
+    //     }
+    //     this.setState({ errors, invalid });
+    //   });
+    // }
 
   }
 
@@ -69,7 +69,13 @@ export default class SignUpForm extends Component {
           });
           this.context.router.push('/');
         },
-        ({ data } ) => this.setState({ errors: data, isLoading: false })
+        (err) => {
+            console.log(err.response.data);
+            this.setState({ 
+            errors: err.response.data.errors,
+            isLoading: false 
+          });
+        }
       );  
     }
 

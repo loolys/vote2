@@ -20,10 +20,10 @@ module.exports = (req, res, next) => {
         query.findOne({}, '_id username', function (err, found) {
           if (!found) {
             res.status(404).json({ error: 'No such user'});
+          } else {
+            req.currentUser = found;
+            next();
           }
-
-          req.currentUser = found;
-          next();
         });
       }
     });
