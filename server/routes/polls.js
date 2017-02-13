@@ -32,9 +32,13 @@ router.post('/', authentication, (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  PollModel.find({}).sort('-date').limit(10).exec(function(err, docs) {
-    if (err) throw err;
-    console.log(docs);
+  PollModel.find({}).sort({$natural: -1}).limit(10).exec(function(err, docs) {
+    if (err) {
+      res.status(500).json({ error: 'Nothing found in database' });
+    } else {
+      res.json(docs);
+    }
+
   });
 })
 

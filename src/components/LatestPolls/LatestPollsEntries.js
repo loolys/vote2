@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PollList from './PollList';
 
 class LatestPollsEntries extends Component {
   constructor(props) {
@@ -10,11 +11,23 @@ class LatestPollsEntries extends Component {
   }
 
   componentWillMount() {
-    this.props.getPolls();
+    this.props.getPolls().then(res => {
+      const titles = res.data.map((obj) => {
+        return { 
+          title: obj.title,
+          id: obj._id 
+        };
+      });
+      console.log(titles);
+      this.setState({ polls: titles });
+    });
   }
   render() {
+    const { polls } = this.state;
     return (
-      <div></div>
+      <div>
+        <PollList polls={polls} />
+      </div>
     );
   }
 }
