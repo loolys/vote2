@@ -70,7 +70,6 @@ export default class SignUpForm extends Component {
           this.context.router.push('/');
         },
         (err) => {
-            console.log(err.response.data);
             this.setState({ 
             errors: err.response.data.errors,
             isLoading: false 
