@@ -43,7 +43,6 @@ router.get('/polls', (req, res) => {
 });
 
 router.get('/test/:id', (req, res) => {
-  console.log('hello');
   let query = PollModel.where({ _id: req.params.id });
   query.findOne(function (err, doc) {
     if (err) throw err;
