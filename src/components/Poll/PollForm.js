@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PollFormList from './PollFormList';
+import { voteForOption } from '../../actions/pollActions';
+import { connect } from 'react-redux';
 
 class PollForm extends Component {
   constructor(props) {
@@ -7,9 +9,12 @@ class PollForm extends Component {
 
     this.state = {
       poll: [],
-      selectedOption: ''
+      title: '',
+      selectedOption: '',
+      id: this.props.id
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -21,7 +26,7 @@ class PollForm extends Component {
           votes: obj.votes
         };
       });
-      this.setState({ poll: options });
+      this.setState({ poll: options, title: res.data.title });
     });
   }
 
@@ -32,17 +37,23 @@ class PollForm extends Component {
     });
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.voteForOption(this.state);
+  }
+
   render() {
-    const { poll, selectedOption } = this.state;
+    const { poll, selectedOption, title } = this.state;
     return (
       <div>
-        Hello from PollForm
-        <form>
+        <form onSubmit={this.onSubmit}>
+          <h1>Title: {title}</h1>
           <PollFormList
             poll={poll}
             onChange={this.handleOptionChange}
             selectedOption={selectedOption}
           />
+          <input type="submit" value="submit" />
         </form>
       </div>
     );
@@ -50,7 +61,8 @@ class PollForm extends Component {
 }
 
 PollForm.propTypes = {
-  getSpecificPoll: React.PropTypes.func.isRequired
+  getSpecificPoll: React.PropTypes.func.isRequired,
+  voteForOption: React.PropTypes.func.isRequired
 };
 
-export default PollForm;
+export default connect(null, { voteForOption })(PollForm);

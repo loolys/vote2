@@ -31,6 +31,23 @@ router.post('/', authentication, (req, res) => {
 
 });
 
+router.post('/vote', (req, res) => {
+  console.log(req);
+  PollModel.update({
+    _id: req.body.id, 'options.text': req.body.selectedOption
+    },
+    { $inc: {'options.$.votes': 1 } },
+    function(err, updated) {
+      if (err) throw err;
+      if (updated) {
+        res.json({ success: true });
+      } else {
+        res.status(500).json({ error: 'Something wrong' });
+      }
+    }
+  );
+});
+
 router.get('/polls', (req, res) => {
   PollModel.find({}).sort({$natural: -1}).limit(10).exec(function(err, docs) {
     if (err) {

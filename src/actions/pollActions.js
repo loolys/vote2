@@ -17,3 +17,9 @@ export function getSpecificPoll(id) {
     return axios.get(`/api/polls/test/${id}`);
   }
 }
+
+export function voteForOption(poll) {
+  return dispatch => {
+    return axios.post('/api/polls/vote', poll);
+  }
+}
