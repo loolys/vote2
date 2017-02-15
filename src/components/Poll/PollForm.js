@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PollFormList from './PollFormList';
 import { voteForOption } from '../../actions/pollActions';
 import { connect } from 'react-redux';
+import { PollChart } from './PollChart';
 
 class PollForm extends Component {
   constructor(props) {
@@ -55,6 +56,8 @@ class PollForm extends Component {
           />
           <input type="submit" value="submit" />
         </form>
+
+        <PollChart />
       </div>
     );
   }
