@@ -16,6 +16,7 @@ class PollForm extends Component {
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.updateVotes = this.updateVotes.bind(this);
   }
 
   componentWillMount() {
@@ -27,7 +28,18 @@ class PollForm extends Component {
           votes: obj.votes
         };
       });
-      this.setState({ poll: options, title: res.data.title });
+      const data = res.data.options.map((obj) => {
+        return {
+          label: obj.text,
+          value: obj.votes
+        };
+      });
+
+      this.setState({
+        poll: options, 
+        title: res.data.title,
+        data: data
+      });
     });
   }
 
@@ -40,11 +52,26 @@ class PollForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.voteForOption(this.state);
+    this.props.voteForOption(this.state).then(this.updateVotes);
+  }
+
+  updateVotes() {
+    this.props.getSpecificPoll(this.props.id).then((res) => {
+      const data = res.data.options.map((obj) => {
+        return {
+          label: obj.text,
+          value: obj.votes
+        };
+      });
+
+      this.setState({
+        data: data
+      });
+    });
   }
 
   render() {
-    const { poll, selectedOption, title } = this.state;
+    const { poll, selectedOption, title, data } = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -57,7 +84,7 @@ class PollForm extends Component {
           <input type="submit" value="submit" />
         </form>
 
-        <PollChart />
+        <PollChart data={data} title={title} />
       </div>
     );
   }

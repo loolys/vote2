@@ -8,10 +8,12 @@ class Poll extends Component {
     const id = this.props.params.id;
     const { getSpecificPoll } = this.props; 
     return (
-      <div>
-        <PollForm 
-          getSpecificPoll={getSpecificPoll}
-          id={id}/>
+      <div className="row">
+        <div className="col-md-4 col-md-offset-4">
+          <PollForm 
+            getSpecificPoll={getSpecificPoll}
+            id={id}/>
+          </div>
       </div>
     );
   }
