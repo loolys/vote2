@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 function PollList(props) {
   const { polls } = props;
   const pollItem = polls.map((item) => 
-    <li key={item.id}>
-      {item.title}
+    <li key={item.id} className="list-group-item">
+      <Link to={"/poll/" + item.id}>{item.title}</Link>
     </li>
   );
   return (
-    <ul>{pollItem}</ul>
+    <ul className="list-group">{pollItem}</ul>
   );
 }
 

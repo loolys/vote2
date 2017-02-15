@@ -65,7 +65,8 @@ class NewPollForm extends Component {
     event.preventDefault();
     let obj = {
       id: this.state.id,
-      text: this.state.option
+      text: this.state.option,
+      votes: 0
     };
 
     this.setState(

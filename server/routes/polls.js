@@ -11,7 +11,7 @@ router.post('/', authentication, (req, res) => {
   if (isValid) {
     const username = req.currentUser.username;
     const { title, options } = req.body;
-
+    options.votes = 0;
     const poll = new PollModel({
       username: username,
       title: title,
@@ -31,7 +31,7 @@ router.post('/', authentication, (req, res) => {
 
 });
 
-router.get('/', (req, res) => {
+router.get('/polls', (req, res) => {
   PollModel.find({}).sort({$natural: -1}).limit(10).exec(function(err, docs) {
     if (err) {
       res.status(500).json({ error: 'Nothing found in database' });
@@ -40,6 +40,19 @@ router.get('/', (req, res) => {
     }
 
   });
-})
+});
+
+router.get('/test/:id', (req, res) => {
+  console.log('hello');
+  let query = PollModel.where({ _id: req.params.id });
+  query.findOne(function (err, doc) {
+    if (err) throw err;
+    if (doc) {
+      res.json(doc);
+    } else {
+      res.status(500).json({error: 'Found nothing'});
+    }
+  });
+});
 
 module.exports = router;

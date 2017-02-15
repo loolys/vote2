@@ -15,7 +15,8 @@ class NavigationBar extends React.Component {
     const userLinks = (
       <div>
       <ul className="nav navbar-nav">
-        <li><Link to="/new-poll">Create Poll </Link></li>
+        <li><Link to="/latest-polls">Latest Polls</Link></li>
+        <li><Link to="/new-poll">Create Poll</Link></li>
       </ul>
       <ul className="nav navbar-nav navbar-right">
         <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
@@ -24,10 +25,15 @@ class NavigationBar extends React.Component {
     );
 
     const guestLinks = (
+      <div>
+        <ul className="nav navbar-nav">
+        <li><Link to="/latest-polls">Latest Polls</Link></li>
+      </ul>
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/signup">Sign up</Link></li>
         <li><Link to="/login">Login</Link></li>
       </ul>
+      </div>
     );
 
     return (

@@ -8,6 +8,12 @@ export function createPoll(poll) {
 
 export function getPolls() {
   return dispatch => {
-    return axios.get('api/polls');
+    return axios.get('api/polls/polls');
+  }
+}
+
+export function getSpecificPoll(id) {
+  return dispatch => {
+    return axios.get(`/api/polls/test/${id}`);
   }
 }

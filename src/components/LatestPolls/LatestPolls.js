@@ -7,10 +7,12 @@ class LatestPolls extends Component {
   render() {
     const { getPolls } = this.props;
     return (
-      <div>
-        <LatestPollsEntries
-          getPolls={getPolls}
-        />
+      <div className="row">
+        <div className="col-md-4 col-md-offset-4">
+          <LatestPollsEntries
+            getPolls={getPolls}
+          />
+        </div>
       </div>
     );
   }

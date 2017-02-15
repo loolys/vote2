@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PollList from './PollList';
 
+import styles from './styles';
+
 class LatestPollsEntries extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +27,8 @@ class LatestPollsEntries extends Component {
   render() {
     const { polls } = this.state;
     return (
-      <div>
+      <div style={styles}>
+        <h1>Latest Polls:</h1>
         <PollList polls={polls} />
       </div>
     );
