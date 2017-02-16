@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PollList from '../LatestPolls/PollList';
+import PollList from './PollList';
+import { connect } from 'react-redux';
+import { deletePolls } from '../../actions/profileActions';
 
 class ProfileData extends Component {
   constructor(props) {
@@ -8,6 +10,8 @@ class ProfileData extends Component {
     this.state = {
       polls: []
     };
+
+    this.deletePoll = this.deletePoll.bind(this);
   }
 
   componentWillMount() {
@@ -22,19 +26,37 @@ class ProfileData extends Component {
     });
   }
 
+  deletePoll(event) {
+    this.props.deletePolls(event.id).then(
+      () => {
+        const filtered = this.state.polls.filter((item) => {
+          return item.id !== event.id;
+        });
+
+        this.setState({ polls: filtered });
+      },
+      (err) => {
+        console.log('error, couldn\'t remove poll');
+      }
+    );
+
+
+  }
+
   render() {
-    const { polls } = this.state;
+    const { polls, deletePoll } = this.state;
     return (
       <div>
       <h1 className="text-center">Your Polls</h1>
-      <PollList polls={polls} />
+      <PollList polls={polls} deletePoll={this.deletePoll} />
       </div>
     );
   }
 }
 
 ProfileData.propTypes = {
-  getUserPolls: React.PropTypes.func.isRequired
+  getUserPolls: React.PropTypes.func.isRequired,
+  deletePolls: React.PropTypes.func.isRequired
 };
 
-export default ProfileData;
+export default connect(null, { deletePolls })(ProfileData);

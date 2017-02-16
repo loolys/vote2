@@ -16,4 +16,17 @@ router.get('/:user', (req, res) => {
   })
 });
 
+router.delete('/delete/:id', (req, res) => {
+  console.log(req.params);
+  const id = req.params.id;
+  PollModel.findByIdAndRemove(id, function (err, offer) {
+    if (err) throw err;
+    if (offer) {
+      res.json({ succes: true });
+    } else {
+      res.status(500).json({ error: 'Could not delete' });
+    }
+  })
+});
+
 module.exports = router;
