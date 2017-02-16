@@ -20,7 +20,7 @@ class LatestPollsEntries extends Component {
           id: obj._id 
         };
       });
-      console.log(titles);
+      
       this.setState({ polls: titles });
     });
   }

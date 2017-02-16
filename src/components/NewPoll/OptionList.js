@@ -1,5 +1,12 @@
 import React from 'react';
 
+// need some margin for the buttons
+const marginStyle = {
+  marginTop: '4px',
+  marginBottom: '4px'
+};
+
+
 function OptionList(props) {
   const { items, deleteOption } = props;
   const listItem = items.map((item) => 
@@ -16,10 +23,5 @@ function OptionList(props) {
   );
 }
 
-// need some margin for the buttons
-const marginStyle = {
-  marginTop: '4px',
-  marginBottom: '4px'
-};
 
 export default OptionList;

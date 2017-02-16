@@ -9,6 +9,7 @@ import Login from './components/Login/Login.js';
 import NewPoll from './components/NewPoll/NewPoll.js';
 import LatestPolls from './components/LatestPolls/LatestPolls.js';
 import Poll from './components/Poll/Poll.js';
+import Profile from './components/Profile/Profile.js';
 
 import requireAuth from './utils/requireAuth';
 
@@ -22,6 +23,7 @@ const Routes = (props) => (
       <Route path="/new-poll" component={requireAuth(NewPoll)} />
       <Route path="/latest-polls" component={LatestPolls} />
       <Route path="/poll/:id" component={Poll} />
+      <Route path="/profile/:user" component={Profile} />
     </Route>
   </Router>
 );
