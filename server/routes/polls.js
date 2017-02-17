@@ -7,7 +7,6 @@ const PollModel = require('../models/poll-model');
 let router = express.Router();
 
 router.post('/', authentication, (req, res) => {
-  console.log(req.currentUser.username);
   const { errors, isValid } = validateInput(req.body);
   if (isValid) {
     const username = req.currentUser.username;
@@ -56,7 +55,6 @@ router.post('/addOption', (req, res) => {
 });
 
 router.post('/vote', (req, res) => {
-  console.log(req);
   PollModel.update({
     _id: req.body.id, 'options.text': req.body.selectedOption
     },

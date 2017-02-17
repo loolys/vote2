@@ -9,6 +9,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import jwt_decode from 'jwt-decode';
 import { setCurrentUser } from './actions/authActions'
 
+
 import Routes from './routes';
 import './index.css';
 
@@ -24,6 +25,7 @@ if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
   store.dispatch(setCurrentUser(jwt_decode(localStorage.jwtToken)));
 }
+
 
 
 ReactDOM.render(

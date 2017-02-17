@@ -7,6 +7,9 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../validations/addOption';
 import cookie from 'react-cookie';
 
+import io from 'socket.io-client';
+let socket = io('http://localhost:9000');
+
 class PollForm extends Component {
   constructor(props) {
     super(props);
@@ -18,13 +21,15 @@ class PollForm extends Component {
       id: this.props.id,
       errors: {},
       addOption: '',
-      voted: false
+      voted: false,
+      data: []
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.updateVotes = this.updateVotes.bind(this);
     this.onChange = this.onChange.bind(this);
     this.submitOption = this.submitOption.bind(this);
+    this.socketUpdate = this.socketUpdate.bind(this);
   }
 
   componentWillMount() {
@@ -53,6 +58,14 @@ class PollForm extends Component {
     if (cookie.load(this.props.id)) {
       this.setState({ voted: true });
     }
+  }
+
+  componentDidMount() {
+    socket.on('updatePoll', this.socketUpdate);
+  }
+
+  socketUpdate(data) {
+    this.setState({ data: data });
   }
 
   isValid() {
@@ -102,6 +115,7 @@ class PollForm extends Component {
             label: this.state.addOption,
             value: 0
           };
+
           this.setState({
             poll: this.state.poll.concat([addToPoll]),
             data: this.state.data.concat([addToData]),
@@ -121,6 +135,8 @@ class PollForm extends Component {
         };
       });
 
+      socket.emit('updatePoll', data);
+
       this.setState({
         data: data
       });
@@ -129,7 +145,6 @@ class PollForm extends Component {
 
   render() {
     const { poll, selectedOption, title, data, errors, addOption, voted } = this.state;
-    console.log(voted);
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-1">
