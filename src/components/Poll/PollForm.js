@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { PollChart } from './PollChart';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../validations/addOption';
+import cookie from 'react-cookie';
 
 class PollForm extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class PollForm extends Component {
       selectedOption: '',
       id: this.props.id,
       errors: {},
-      addOption: ''
+      addOption: '',
+      voted: false
     };
     this.handleOptionChange = this.handleOptionChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -47,6 +49,10 @@ class PollForm extends Component {
         data: data
       });
     });
+
+    if (cookie.load(this.props.id)) {
+      this.setState({ voted: true });
+    }
   }
 
   isValid() {
@@ -72,6 +78,8 @@ class PollForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.voteForOption(this.state).then(this.updateVotes);
+    cookie.save(this.props.id, true, { path: '/' });
+    this.setState({ voted: true });
   }
 
   submitOption(event) {
@@ -83,7 +91,24 @@ class PollForm extends Component {
         }
       });
 
-      this.props.addOption(this.state);
+      this.props.addOption(this.state).then(
+        () => {
+          const addToPoll = {
+            id: this.state.poll.length,
+            option: this.state.addOption,
+            votes: 0
+          };
+          const addToData = {
+            label: this.state.addOption,
+            value: 0
+          };
+          this.setState({
+            poll: this.state.poll.concat([addToPoll]),
+            data: this.state.data.concat([addToData]),
+            addOption: ''
+          });
+        }
+      );
     }
   }
 
@@ -103,25 +128,26 @@ class PollForm extends Component {
   }
 
   render() {
-    const { poll, selectedOption, title, data, errors, addOption } = this.state;
+    const { poll, selectedOption, title, data, errors, addOption, voted } = this.state;
+    console.log(voted);
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-1">
-          <form onSubmit={this.onSubmit}>
+          { !voted ? <form onSubmit={this.onSubmit}>
             <h1>Title: {title}</h1>
             <PollFormList
               poll={poll}
               onChange={this.handleOptionChange}
               selectedOption={selectedOption}
             />
-            <input type="submit" value="submit" />
-          </form>
+            <input type="submit" disabled={voted} value="submit" />
+          </form> : 'thank you for voting' }
         </div>
         <div className="col-md-4">
           <PollChart data={data} title={title} />
         </div>
         <div className="col-md-4 col-md-offset-1">
-          <form onSubmit={this.submitOption}>
+          { !voted ? <form onSubmit={this.submitOption}>
             <h2>Don't like any option? Add your own!</h2>
             <TextFieldGroup
               field="addOption"
@@ -133,7 +159,7 @@ class PollForm extends Component {
               type="text"
             />
             <input type="submit" value="add" />
-          </form>
+          </form> : '' }
         </div>
       </div>
     );
