@@ -8,7 +8,7 @@ import validateInput from '../../validations/addOption';
 import cookie from 'react-cookie';
 
 import io from 'socket.io-client';
-let socket = io('http://localhost:9000');
+let socket = io('https://createpolls.herokuapp.com');
 
 class PollForm extends Component {
   constructor(props) {
