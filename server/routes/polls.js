@@ -1,6 +1,7 @@
 const express = require('express');
 const authentication = require('../middlewares/authentication');
 const validateInput = require('../shared/validations/poll');
+const validateOption = require('../shared/validations/addOption');
 const PollModel = require('../models/poll-model');
 
 let router = express.Router();
@@ -20,13 +21,36 @@ router.post('/', authentication, (req, res) => {
 
     poll.save(function (err) {
       if (err) {
-        res.status(500).json({error: 'couldn\'t save'});
+        res.status(500).json({ error: 'couldn\'t save' });
       } else {
         res.json({ success: true });
       }
     })
   } else {
-    res.status(400).json({error: 'invalid input'});
+    res.status(400).json({ error: 'invalid input'});
+  }
+
+});
+
+router.post('/addOption', (req, res) => {
+  const { errors, isValid } = validateOption(req.body);
+  
+  if (isValid) {
+    const id = req.body.id;
+    const optionObj = {
+      text: req.body.addOption,
+      id: req.body.poll.length,
+      votes: 0
+    };
+    
+    PollModel.findByIdAndUpdate(id, {
+      $push: {'options': optionObj}
+    }, function (err, model) {
+      if (err) throw err;
+      res.json({ success: true });
+    })
+  } else {
+    res.status(400).json({ error: 'invalid input' });
   }
 
 });

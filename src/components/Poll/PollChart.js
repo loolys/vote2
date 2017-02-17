@@ -20,8 +20,8 @@ function getChart(data, title) {
     id: "revenue-chart",
     renderAt: "revenue-chart-container",
     type: "column2d",
-    width:600,
-    height: 400,
+    width: 450,
+    height: 300,
     dataFormat: "json",
     dataSource: myDataSource
   };
@@ -41,7 +41,6 @@ export class PollChart extends Component {
   }
   render() {
     const { data, title } = this.props;
-    console.log(title);
     let revenueChartConfigs = getChart(data, title);
     return (
       <div>

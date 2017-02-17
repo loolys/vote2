@@ -23,3 +23,9 @@ export function voteForOption(poll) {
     return axios.post('/api/polls/vote', poll);
   }
 }
+
+export function addOption(option) {
+  return dispatch => {
+    return axios.post('/api/polls/addOption', option);
+  }
+}

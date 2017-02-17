@@ -3,8 +3,6 @@ import React from 'react';
 function PollFormList(props) {
   const { poll, selectedOption, onChange } = props;
 
-  console.log(poll);
-
   const pollItem = poll.map((item) =>
     <div className="radio" key={item.id} >
       <label>
