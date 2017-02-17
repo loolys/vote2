@@ -23,7 +23,7 @@ const Routes = (props) => (
       <Route path="/new-poll" component={requireAuth(NewPoll)} />
       <Route path="/latest-polls" component={LatestPolls} />
       <Route path="/poll/:id" component={Poll} />
-      <Route path="/profile/:user" component={Profile} />
+      <Route path="/profile/:user" component={requireAuth(Profile)} />
     </Route>
   </Router>
 );
