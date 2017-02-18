@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
       if (err) {
         return res.status(500).json({ success: false, status: '500', errors: { username: 'Username exists'} });
       }
-      res.json({ success: true, status: 200, errors: '' });
+      res.json({ success: true, status: 200, errors: { } });
     });
 
   } else {
