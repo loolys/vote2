@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const compression = require('compression');
 
 const users = require('./routes/users');
 const auth = require('./routes/auth');
@@ -24,6 +25,7 @@ db.once('open', function() {
 const app = express();
 
 app.use(bodyParser.json());
+app.use(compression());
 
 app.use('/api/users', users);
 app.use('/api/auth', auth);
