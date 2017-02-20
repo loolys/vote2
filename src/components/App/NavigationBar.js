@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
+import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class NavigationBar extends React.Component {
   logout(event) {
@@ -15,41 +17,55 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <div>
-      <ul className="nav navbar-nav">
-        <li><Link to="/latest-polls">Latest Polls</Link></li>
-        <li><Link to="/new-poll">Create Poll</Link></li>
-      </ul>
-      <ul className="nav navbar-nav navbar-right">
-        <li><Link to={`/profile/${username}`}>{username}</Link></li>
-        <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
-      </ul>
+      <Nav bsStyle="pills">
+        <LinkContainer to="/latest-polls">
+          <NavItem style={{color:"white"}}>Latest Polls</NavItem>
+        </LinkContainer>
+        <LinkContainer  to="/new-poll">
+          <NavItem>Create Poll</NavItem>
+        </LinkContainer>
+      </Nav>
+      <Nav pullRight>
+        <LinkContainer to={`/profile/${username}`}>
+          <NavItem>{username}</NavItem>
+        </LinkContainer>
+        <NavItem href="#" onClick={this.logout.bind(this)}>Logout</NavItem>
+      </Nav>
       </div>
     );
 
     const guestLinks = (
       <div>
-        <ul className="nav navbar-nav">
-        <li><Link to="/latest-polls">Latest Polls</Link></li>
-      </ul>
-      <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/signup">Sign up</Link></li>
-        <li><Link to="/login">Login</Link></li>
-      </ul>
+      <Nav>
+        <LinkContainer to="/latest-polls">
+          <NavItem>Latest Polls</NavItem>
+        </LinkContainer>
+      </Nav>
+      <Nav pullRight>
+        <LinkContainer to="/signup">
+          <NavItem>Sign up</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/login">
+          <NavItem>Login</NavItem>
+        </LinkContainer>
+      </Nav>
       </div>
     );
 
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <Link to="/" className="navbar-brand">Voting-App</Link>
-          </div>
-
-          <div className="collapse navbar-collapse">
-            { isAuthenticated ? userLinks : guestLinks }
-          </div>
-        </div>
-      </nav>
+      <div className="my-nav">
+      <Navbar collapseOnSelect style={{backgroundColor: "#084F70", color:"#FEFEFE"}}>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Voting-App</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          { isAuthenticated ? userLinks : guestLinks }
+        </Navbar.Collapse>
+      </Navbar>
+      </div>
     );   
   }
 }

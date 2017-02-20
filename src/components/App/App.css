@@ -19,3 +19,48 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.navbar-default .navbar-nav > li > a{
+    color: #FEFEFE;
+   background: #084F70;
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+    color: #FEFEFE;
+   background: #084F70;
+}
+
+.navbar-default .navbar-nav > li > a:active{
+    color: #FEFEFE;
+   background: #084F70;
+}
+
+.navbar-default .navbar-nav > li > a:focus{
+    color: #FEFEFE;
+   background: #084F70;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FEFEFE;
+   background: #084F70;
+}
+
+.navbar-default .navbar-brand {
+  color: #FEFEFE;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #FEFEFE;
+}
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}

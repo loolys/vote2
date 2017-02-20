@@ -125,7 +125,7 @@ class NewPollForm extends Component {
           className="btn btn-success"
           onClick={this.addOption}
         >
-          Add item
+          Add Option
         </button>
 
       <button type="button"
