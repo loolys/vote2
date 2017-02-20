@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PollList from './PollList';
 
-import styles from './styles';
 
 class LatestPollsEntries extends Component {
   constructor(props) {
@@ -20,15 +19,15 @@ class LatestPollsEntries extends Component {
           id: obj._id 
         };
       });
-      
+
       this.setState({ polls: titles });
     });
   }
   render() {
     const { polls } = this.state;
     return (
-      <div style={styles}>
-        <h1>Latest Polls:</h1>
+      <div>
+        <h1 className="text-center">Latest Polls</h1>
         <PollList polls={polls} />
       </div>
     );

@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { getPolls } from '../../actions/pollActions';
 import LatestPollsEntries from './LatestPollsEntries';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap';
 import './LatestPolls.css'
 
 class LatestPolls extends Component {
   render() {
     const { getPolls } = this.props;
     return (
-      <div className="LatestPolls">
-      <div className="row">
-        <div className="col-md-4 col-md-offset-4">
+      <Grid className="latest-polls">
+        <Row className="show-grid">
+          <Col md={4} mdOffset={4} sm={6} smOffset={3} xs={8} xsOffset={2}>
           <LatestPollsEntries
             getPolls={getPolls}
           />
-        </div>
-      </div>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

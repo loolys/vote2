@@ -20,7 +20,7 @@ function getChart(data, title) {
     id: "revenue-chart",
     renderAt: "revenue-chart-container",
     type: "column2d",
-    width: 450,
+    width: "90%",
     height: 300,
     dataFormat: "json",
     dataSource: myDataSource

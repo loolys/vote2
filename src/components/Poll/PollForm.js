@@ -147,8 +147,9 @@ class PollForm extends Component {
     const { poll, selectedOption, title, data, errors, addOption, voted } = this.state;
     return (
       <div className="row">
-        <div className="col-md-4 col-md-offset-1">
-          { !voted ? <form onSubmit={this.onSubmit}>
+        { !voted ?
+        <div className="col-md-3 col-md-offset-1">
+           <form onSubmit={this.onSubmit}>
             <h1>Title: {title}</h1>
             <PollFormList
               poll={poll}
@@ -156,12 +157,13 @@ class PollForm extends Component {
               selectedOption={selectedOption}
             />
             <input type="submit" disabled={voted} value="submit" />
-          </form> : 'thank you for voting' }
+          </form> 
         </div>
+        : <div></div> }
         <div className="col-md-4">
           <PollChart data={data} title={title} />
         </div>
-        <div className="col-md-4 col-md-offset-1">
+        <div className="col-md-3">
           { !voted ? <form onSubmit={this.submitOption}>
             <h2>Don't like any option? Add your own!</h2>
             <TextFieldGroup

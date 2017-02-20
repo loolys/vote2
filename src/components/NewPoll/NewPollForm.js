@@ -92,7 +92,7 @@ class NewPollForm extends Component {
     return (
       <div>
       <form onSubmit={this.addOption}>
-        <h1>Create New Poll</h1>
+        <h1 className="text-center">Create A New Poll</h1>
 
         <TextFieldGroup
           field="title"

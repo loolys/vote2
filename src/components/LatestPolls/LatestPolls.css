@@ -1,11 +1,10 @@
-.LatestPolls a {
-  color: black;
+.latest-polls {
+  background-color: #F5F5F5;
+  width: 100%;
+  padding-bottom: 100px;
 }
 
-.LatestPolls a:hover {
-  color: black;
-}
-
-.LatestPolls a:visited {
-  color: black;
+.latest-polls h1 {
+  font-size: 40px;
+  color: #424242;
 }

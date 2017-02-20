@@ -15,3 +15,9 @@
   border: 0px;
   border-radius: 0px;
 }
+
+.btn-warning a,
+.btn-warning a:hover {
+  color: white;
+  text-decoration: none;
+}

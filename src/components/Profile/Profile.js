@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import ProfileData from './ProfileData';
 import { connect } from 'react-redux';
 import { getUserPolls } from '../../actions/profileActions';
+import { Grid, Row, Col } from 'react-bootstrap';
+
+import './profile.css';
 
 class Profile extends Component {
   render() {
     const { getUserPolls } = this.props;
     return (
-      <div className="row">
-        <div className="col-md-4 col-md-offset-4">
-          <ProfileData getUserPolls={getUserPolls} />
-        </div>
-      </div>
+      <Grid className="profile-polls">
+        <Row className="show-grid">
+          <Col md={4} mdOffset={4} sm={6} smOffset={3} xs={8} xsOffset={2}>
+            <ProfileData getUserPolls={getUserPolls} />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
