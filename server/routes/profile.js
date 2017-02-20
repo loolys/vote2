@@ -4,7 +4,6 @@ const PollModel = require('../models/poll-model');
 let router = express.Router();
 
 router.get('/:user', (req, res) => {
-  console.log(req.params);
   PollModel.find({ username: req.params.user }, function (err, polls) {
     if (err) throw err;
     if (polls) {
@@ -17,7 +16,6 @@ router.get('/:user', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-  console.log(req.params);
   const id = req.params.id;
   PollModel.findByIdAndRemove(id, function (err, offer) {
     if (err) throw err;

@@ -15,7 +15,7 @@ class ProfileData extends Component {
   }
 
   componentWillMount() {
-    this.props.getUserPolls('loolY').then((res) => {
+    this.props.getUserPolls(this.props.auth.user.username).then((res) => {
       const polls = res.data.map((item) => {
         return {
           id: item._id,
@@ -56,7 +56,14 @@ class ProfileData extends Component {
 
 ProfileData.propTypes = {
   getUserPolls: React.PropTypes.func.isRequired,
-  deletePolls: React.PropTypes.func.isRequired
+  deletePolls: React.PropTypes.func.isRequired,
+  auth: React.PropTypes.object.isRequired
 };
 
-export default connect(null, { deletePolls })(ProfileData);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, { deletePolls })(ProfileData);
