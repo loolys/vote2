@@ -5,7 +5,7 @@
 }
 
 .big-icon {
-  font-size: 200px;
+  font-size: 15vw;
   color: #424242;
 }
 
@@ -15,5 +15,6 @@
 }
 
 .statistics h1 {
+  font-size: 3vw;
   color: #424242;
 }
