@@ -1,20 +1,30 @@
 .statistics {
   background-color: #E8E8E8;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 15px;
+  padding-bottom: 40px;
 }
 
-.big-icon {
-  font-size: 15vw;
-  color: #424242;
+.statistics:before {
+  display: inline-block;
+  height: 100%;  
 }
 
 .statistics {
   color: #A2A7A8;
-  font-size: 17px;
+  font-size: 1em;
 }
 
 .statistics h1 {
-  font-size: 3vw;
+  font-size: 2em;
   color: #424242;
+}
+
+.poll-col {
+  font-size: 15em;
+  padding-top: 0.1em;
+  color: #424242;
+}
+
+.poll-text {
+  padding-top: 5vw;
 }

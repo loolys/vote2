@@ -2,8 +2,8 @@ import React from 'react';
 
 // need some margin for the buttons
 const marginStyle = {
-  marginTop: '4px',
-  marginBottom: '4px'
+  marginTop: '7px',
+  marginBottom: '7px',
 };
 
 
